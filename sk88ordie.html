@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>SK88 OR DIE</title>
+<style>
+  body,html{margin:0;padding:0;height:100%;background:#000;color:#0f0;font-family:'Courier New',monospace;overflow:hidden}
+  #o{position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;z-index:999999}
+  #c{width:100%;max-width:900px;background:#000;image-rendering:pixelated}
+  #t,#s,#d,#h{position:absolute;z-index:9;color:#0f0;text-shadow:0 0 20px}
+  #t{top:10vh;font-size:9vw;text-align:center;animation:g 2s infinite alternate}
+  #s{top:10px;left:10px;font-size:6vw}
+  #d{top:10px;right:10px;font-size:6vw;color:#f00;animation:p .7s infinite}
+  #h{top:50px;left:10px;font-size:5vw;opacity:0.8}
+  #b{position:fixed;bottom:10vh;left:50%;transform:translateX(-50%);background:#c00;color:#fff;padding:5vw 15vw;font-size:8vw;border-radius:20px;box-shadow:0 0 60px #f00;animation:p 1s infinite;border:none;z-index:99}
+  @keyframes g{from{text-shadow:0 0 20px #0f0}to{text-shadow:0 0 80px #f00}}
+  @keyframes p{0%,100%{opacity:1}50%{opacity:0.5}}
+</style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HDXNR8D1Q5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HDXNR8D1Q5');
+</script>
+<body><a href="https://sk88ordie.com/cdn-cgi/content?id=z8ncR5AOr7xkzJA_MZdfzfJtGZ7Hv.tUwO6NRlXxkSw-1768692342.6668355-1.0.1.1-6HVqXqRW_IofMFo5xI6RDCc97A0FpPteRc58fCJJnFk" aria-hidden="true" rel="nofollow noopener" style="display: none !important; visibility: hidden !important"></a>
+
+<div id="o">
+  <div id="t">PRESS SPACE<br>OR TAP TO SKATE IN HELL</div>
+  <div id="s">Score: 0</div>
+  <div id="d">Doom in: 10</div>
+  <div id="h">High Score: 0</div>
+  <button id="b">TAP TO JUMP</button>
+  <canvas id="c" width="900" height="320"></canvas>
+</div>
+
+<audio id="bgm" loop preload="auto">
+  <source src="https://bankcoin.loan/skateordie.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+(() => {
+  const o = document.getElementById('o');
+  const c = document.getElementById('c');
+  const ctx = c.getContext('2d');
+  const t = document.getElementById('t');
+  const s = document.getElementById('s');
+  const d = document.getElementById('d');
+  const h = document.getElementById('h');
+  const b = document.getElementById('b');
+  const bgm = document.getElementById('bgm');
+
+  let running = false, score = 0, highScore = localStorage.sk88high || 0;
+  let py = 130, vel = 0, obs = [], f = 0, secs = 10;
+  let unlocked = false;
+
+  if (bgm) bgm.volume = 0.3;
+  h.textContent = 'High Score: ' + highScore;
+
+  // DOOM COUNTDOWN
+  const countdownTimer = setInterval(() => {
+    secs = Math.max(0, secs - 1);
+    if (secs > 0) {
+      d.textContent = `Doom in: ${secs}`;
+      d.style.color = secs <= 3 ? '#f00' : '#ff0';
+      d.style.fontSize = secs <= 3 ? '7vw' : '6vw';
+    } else {
+      d.textContent = 'SKATE OR DIE!';
+      d.style.color = '#f00';
+      d.style.fontSize = '7vw';
+      clearInterval(countdownTimer);
+    }
+  }, 1000);
+
+  // RESET DOOM TIMER — now works on taps/jumps too
+  const resetDoom = () => {
+    secs = 10;
+    d.textContent = 'Doom in: 10';
+    d.style.color = '#ff0';
+    d.style.fontSize = '6vw';
+  };
+
+  // Attach to document for movement/keydown (not prevented)
+  ['mousemove', 'keydown'].forEach(ev => document.addEventListener(ev, resetDoom, {passive:true}));
+
+  // Attach to overlay for taps/clicks — use capture phase so it fires before preventDefault
+  o.addEventListener('touchstart', resetDoom, {passive:true});
+  o.addEventListener('click', resetDoom);
+
+  const playMusic = () => {
+    if (bgm && bgm.paused && unlocked) bgm.play().catch(() => {});
+  };
+
+  const JUMP = e => {
+    if (e) e.preventDefault();  // only preventDefault if event exists
+    unlocked = true;
+    playMusic();
+    resetDoom();  // ← ALWAYS reset doom on jump/tap
+
+    if (!running) {
+      t.style.display = 'none';
+      b.style.display = 'block';
+      running = true;
+      requestAnimationFrame(loop);
+    }
+    if (py >= 199.9) vel = -23;
+  };
+
+  o.onclick = o.ontouchstart = JUMP;
+  b.onclick = b.ontouchstart = JUMP;
+  document.onkeydown = e => e.code === 'Space' && JUMP();
+
+  function drawGrimReaper(x, y) {
+    ctx.fillStyle = '#f00'; ctx.fillRect(x-15, y+88, 100, 16);
+    ctx.fillStyle = '#fff'; ctx.fillRect(x-10, y+92, 20, 6); ctx.fillRect(x+70, y+92, 20, 6);
+    ctx.fillStyle = '#000'; ctx.fillRect(x, y, 80, 100);
+    ctx.beginPath(); ctx.moveTo(x+15, y); ctx.lineTo(x+65, y); ctx.lineTo(x+55, y-30); ctx.lineTo(x+25, y-30); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#0f0'; ctx.fillRect(x+28, y+12, 8, 8); ctx.fillRect(x+48, y+12, 8, 8);
+    ctx.strokeStyle = '#ccc'; ctx.lineWidth = 10;
+    ctx.beginPath(); ctx.moveTo(x+80, y+40); ctx.lineTo(x+140, y-60); ctx.stroke();
+  }
+
+  function loop() {
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 900, 320);
+    ctx.fillStyle = '#400'; ctx.fillRect(0, 270, 900, 50);
+    ctx.strokeStyle = '#0f0'; ctx.lineWidth = 14;
+    ctx.beginPath(); ctx.moveTo(0, 270); ctx.lineTo(900, 270); ctx.stroke();
+
+    vel += 0.8; py += vel;
+    if (py >= 200) { py = 200; vel = 0; }
+
+    drawGrimReaper(140, py);
+
+    if (f % 75 === 0) obs.push({ x: 920, y: Math.random() > 0.5 ? 80 : 210, bat: Math.random() > 0.5 });
+    obs = obs.filter(o => {
+      o.x -= 8;
+      if (o.bat) {
+        ctx.fillStyle = '#ff0';
+        ctx.beginPath(); ctx.moveTo(o.x, o.y); ctx.lineTo(o.x + 60, o.y + 50); ctx.lineTo(o.x, o.y + 100); ctx.lineTo(o.x - 40, o.y + 50); ctx.closePath(); ctx.fill();
+      } else {
+        ctx.fillStyle = '#888'; ctx.fillRect(o.x, 200, 80, 100);
+        ctx.fillStyle = '#f00'; ctx.font = 'bold 40px monospace'; ctx.fillText('RIP', o.x + 8, 255);
+      }
+      if (o.x < 260 && o.x > 100 && ((o.bat && py < 160) || (!o.bat && py > 160))) {
+        if (score > highScore) {
+          highScore = score; localStorage.sk88high = highScore;
+          h.textContent = 'High Score: ' + highScore + ' (NEW!)';
+        }
+        running = false; t.style.display = 'block'; b.style.display = 'none';
+        obs = []; f = 0; py = 130; vel = 0; score = 0; s.textContent = 'Score: 0';
+        resetDoom(); // reset doom on death too
+      }
+      return o.x > -150;
+    });
+
+    score++; s.textContent = 'Score: ' + ~~(score / 10);
+    f++;
+    if (running) requestAnimationFrame(loop);
+  }
+})();
+</script>
+
+<footer>© 2025 SK8ORDIE.COM — SKATE OR DIE™ is forever</footer>
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ba8ca5770aa14007b68be2f97dc49db4"}'></script><!-- Cloudflare Pages Analytics --><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bf99d05ade84d90',t:'MTc2ODY5MjM0Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

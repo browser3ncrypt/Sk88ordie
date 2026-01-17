@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://bankcoin.loan/SkateorDie.gif">
+    <title>SK88 OR DIE | Coming Soon</title>
+    <meta name="description" content="SK88 OR DIE - The radical return. Something massive is grinding its way in. Coming soon.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Creepster&family=Press+Start+2P&display=swap');
+
+        * { box-sizing: border-box; }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #000000, #1a0033);
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .glitch {
+            font-family: 'Bangers', cursive;
+            font-size: 9vw;
+            letter-spacing: 0.1em;
+            color: #ff00ff;
+            text-shadow: 
+                0 0 10px #ff00ff,
+                0 0 20px #00ffff,
+                4px 4px 0 #000,
+                -4px -4px 0 #00ff00;
+            animation: glitch 3s infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes glitch {
+            0%,100% { text-shadow: 4px 4px 0 #000, -4px -4px 0 #00ff00, 0 0 20px #ff00ff; }
+            20% { text-shadow: -4px 4px 0 #00ffff, 4px -4px 0 #ff00ff, 0 0 30px #00ff00; }
+            40% { text-shadow: 4px -4px 0 #000, -4px 4px 0 #00ffff, 0 0 15px #ff00ff; }
+            60% { text-shadow: -4px -4px 0 #ff00ff, 4px 4px 0 #00ff00, 0 0 25px #00ffff; }
+            80% { text-shadow: 4px 4px 0 #00ffff, -4px -4px 0 #000, 0 0 35px #ff00ff; }
+        }
+
+        .subtitle {
+            font-size: 2.8vw;
+            color: #00ffff;
+            text-shadow: 0 0 15px #00ffff;
+            margin-bottom: 40px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .skull {
+            width: 280px;
+            height: 280px;
+            background: url('https://bankcoin.loan/SkateorDie.gif') center/contain no-repeat;
+            margin: 40px 0;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .coming-soon {
+            font-size: 5vw;
+            color: #ff00ff;
+            text-shadow: 0 0 20px #ff00ff;
+            margin: 30px 0;
+        }
+
+        .email-form {
+            margin-top: 50px;
+        }
+
+        input[type="email"] {
+            padding: 15px 60px;
+            font-size: 1.2rem;
+            border: 4px solid #00ffff;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            border-radius: 0;
+            width: 320px;
+            max-width: 90vw;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        button {
+            padding: 15px 40px;
+            background: #ff00ff;
+            color: #000;
+            border: none;
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 10px;
+            box-shadow: 0 0 20px #ff00ff;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #00ffff;
+            box-shadow: 0 0 30px #00ffff;
+            transform: scale(1.1);
+        }
+
+        .footer {
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        /* Retro CRT scanlines */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.05), rgba(0,0,0,0.05) 1px, transparent 1px, transparent 2px);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .glitch { font-size: 12vw; }
+            .subtitle { font-size: 5vw; }
+            .coming-soon { font-size: 8vw; }
+            .skull { width: 200px; height: 200px; }
+            input[type="email"] { width: 100%; margin-bottom: 15px; }
+            button { margin-left: 0; width: 100%; }
+        }
+    </style>
+
+<nav class="container">
+      <a href="index.html" class="logo">Skate or Die!</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Table of Contents</a></li>
+        <li><a href="gallery.html">Cool GIF's</a></li>
+<li><a href="sk88ordie.html">Sk88 or die Version 2.0</a></li>
+        <li><a href="Skateordie.html">Sk88 or die video game Version 1.0 (Desktop friendly only)</a></li>
+      </ul>
+    </nav>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HDXNR8D1Q5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HDXNR8D1Q5');
+</script>
+<script src="https://analytics.ahrefs.com/analytics.js" data-key="sk/WEoDON1uusykwpaDtpw" async></script>
+<body><a href="https://sk88ordie.com/cdn-cgi/content?id=PvNkr4o_SXU0Y_OB60sCk2hL_IL5wzoPpVVgvsg5ZVg-1768692321.93154-1.0.1.1-Jk.xACF1amT6XrToVocvDE9oI.zJnFyBkJUc9.zntHk" aria-hidden="true" rel="nofollow noopener" style="display: none !important; visibility: hidden !important"></a>
+    <div class="container">
+        <div class="main-content">
+            <h1 class="glitch">SK88 OR DIE</h1>
+            <p class="subtitle">RADICAL. GNARLY. TOTALLY TUBULAR.</p>
+
+            <div class="skull"></div>
+
+            <h2 class="coming-soon">COMING SOON</h2>
+
+            <p style="font-size:1.4rem; max-width:700px; line-height:1.8;">
+                The legendary crew is rebuilding the ramp.<br>
+                Bigger airs, harder slams, zero cops.<br>
+                Get notified the second we drop.
+            </p>
+
+     </div>
+            <div class="email-form">
+                <form action="https://formspree.io/f/mnnrypvl" method="POST"> <!-- Replace with your actual endpoint -->
+                    <input type="email" name="email" placeholder="ENTER EMAIL FOR FIRST OLLIE" required>
+                    <button type="submit">NOTIFY ME</button>
+                </form>
+            </div>
+    </div>
+            <div class="email-form">
+    <a href="/cdn-cgi/l/email-protection#35415d4754465d1b5d54475175465e0d0d5a47515c501b565a580a4640575f50564108667e0d0d1007057a67100705717c7010070576677062" class="button" style="display:inline-block; padding:15px 40px; background:#ff00ff; color:#000; 
+              font-family:'Bangers', cursive; font-size:1.5rem; text-decoration:none;
+              box-shadow:0 0 20px #ff00ff; transition:all 0.3s;">
+     ⚡ SCREAM AT US ⚡ thrash.hard@ᛋk88ordie.com
+    </a>
+    <p style="margin-top:15px; font-size:0.9rem; opacity:0.8;">
+        (or click the link which, opens your email app for you— old school way)
+    </p>
+</div>
+        </div>
+
+        <div class="footer">
+            © 2025 SK88ORDIE.COM — SKATE OR DIE™ is forever
+        </div>
+    </div>
+<!-- Cloudflare Pages Analytics --><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ba8ca5770aa14007b68be2f97dc49db4"}'></script><!-- Cloudflare Pages Analytics --><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bf99c841d0a4d90',t:'MTc2ODY5MjMyMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

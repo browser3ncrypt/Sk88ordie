@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SK88 OR DIE | Coming Soon</title>
+    <meta name="description" content="The ultimate 8-bit endless runner from hell.">
+    <style>
+        body,html{margin:0;padding:0;height:100%;background:#000;color:#0f0;font-family:'Courier New',monospace;overflow:hidden}
+        footer{position:fixed;bottom:10px;left:0;width:100%;text-align:center;font-size:12px;opacity:0.5;color:#0f0;z-index:1}
+    </style>
+</head>
+<body><a href="https://sk88ordie.com/cdn-cgi/content?id=BqrkheBHyOn9HIyf4UQzp4j8oFJVyXqUarvaAwUjMow-1768692362.0015385-1.0.1.1-26HdR3q31xslxQe3M29XzaXyu3VWsADRJM0sbp40YIM" aria-hidden="true" rel="nofollow noopener" style="display: none !important; visibility: hidden !important"></a>
+
+<div id="grim-overlay" style="display:none">
+<style>
+#grim-overlay{position:fixed!important;top:0;left:0;width:100vw!important;height:100vh!important;
+  background:#000;z-index:2147483647!important;display:flex!important;flex-direction:column;
+  align-items:center;justify-content:center;overflow:hidden;image-rendering:pixelated}
+#grim-canvas{background:#000;display:block;margin-top:20px}
+#grim-score,#grim-countdown{position:absolute;top:15px;font-size:36px;color:#0f0;text-shadow:0 0 12px}
+#grim-score{left:15px}
+#grim-countdown{right:15px;color:#f00;animation:pulse 0.7s infinite}
+#grim-start{color:#0f0;font-size:48px;text-align:center;text-shadow:0 0 20px #0f0;animation:glow 2s infinite alternate}
+#tap-btn{position:fixed;bottom:40px;background:#c00;color:#fff;padding:22px 70px;font-size:32px;
+  border-radius:16px;box-shadow:0 0 50px #f00;animation:pulse 1s infinite;touch-action:manipulation}
+@keyframes glow{from{text-shadow:0 0 20px #0f0}to{text-shadow:0 0 70px #f00}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* Pure CSS grim reaper, tombstones, bats */
+.reaper{fill:#f00}
+.tomb{fill:#aaa}
+.bat{fill:#ff0}
+.ground{fill:#080;stroke:#0f0;stroke-width:8}
+.blood{fill:#600;opacity:0.8}
+</style>
+
+<div id="grim-start">PRESS SPACE<br>OR TAP TO SKATE IN HELL</div>
+<div id="grim-score">Score: 0</div>
+<div id="grim-countdown">Doom in: 10</div>
+<button id="tap-btn">TAP TO JUMP</button>
+
+<canvas id="grim-canvas" width="800" height="200"></canvas>
+
+<script>
+(() => {
+  const overlay = document.getElementById('grim-overlay');
+  const canvas = document.getElementById('grim-canvas');
+  const ctx = canvas.getContext('2d');
+  const startText = document.getElementById('grim-start');
+  const scoreEl = document.getElementById('grim-score');
+  const countdownEl = document.getElementById('grim-countdown');
+  const btn = document.getElementById('tap-btn');
+
+  let running = false, score = 0, py = 80, vel = 0, obstacles = [], frame = 0, secs = 10;
+
+  // Reset countdown on any activity
+  const reset = () => { if (!overlay.style.display || overlay.style.display === 'none') secs = 10; };
+  ['mousemove','mousedown','keydown','scroll','touchstart','touchmove'].forEach(e => window.addEventListener(e, reset, {passive:true}));
+
+  // Jump / start game
+  const jump = e => { e.preventDefault(); if (!running) startGame(); if (py >= 135) vel = -15; };
+  document.addEventListener('keydown', e => { if (e.code === 'Space') jump(e); });
+  canvas.addEventListener('click', jump);
+  canvas.addEventListener('touchstart', jump, {passive:false});
+  btn.addEventListener('click', jump);
+  btn.addEventListener('touchstart', jump, {passive:false});
+
+  function startGame() {
+    startText.style.display = 'none';
+    btn.style.display = 'block';
+    running = true;
+    requestAnimationFrame(loop);
+  }
+
+  function loop() {
+    // Physics
+    vel += 0.6; py += vel;
+    if (py > 135) { py = 135; vel = 0; }
+
+    // Spawn obstacles
+    if (frame % 80 === 0) {
+      const isBat = Math.random() > 0.5;
+      obstacles.push({x:820, y:isBat?50:150, bat:isBat});
+    }
+
+    // Draw
+    ctx.fillStyle = '#000'; ctx.fillRect(0,0,800,200);
+
+    // Dripping blood ground
+    ctx.fillStyle = '#600';
+    for (let i = 0; i < 800; i += 40) ctx.fillRect(i, 170, 30, 40);
+
+    // Green ground line
+    ctx.strokeStyle = '#0f0'; ctx.lineWidth = 12;
+    ctx.beginPath(); ctx.moveTo(0,170); ctx.lineTo(800,170); ctx.stroke();
+
+    // Grim Reaper (pure CSS → drawn here)
+    ctx.fillStyle = '#f00';
+    ctx.fillRect(100, py-40, 60, 80); // body
+    ctx.fillStyle = '#000';
+    ctx.fillRect(110, py-30, 40, 50); // hood
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(125, py-15, 10, 10); // eyes
+
+    // Obstacles
+    obstacles = obstacles.filter(o => {
+      o.x -= 6;
+      if (o.bat) {
+        ctx.fillStyle = '#ff0';
+        ctx.beginPath();
+        ctx.moveTo(o.x, o.y); ctx.lineTo(o.x+40, o.y+20); ctx.lineTo(o.x, o.y+40);
+        ctx.lineTo(o.x-10, o.y+20); ctx.closePath(); ctx.fill(); // bat wings
+      } else {
+        ctx.fillStyle = '#aaa';
+        ctx.fillRect(o.x, 140, 50, 60);
+        ctx.fillStyle = '#666';
+        ctx.fillRect(o.x+10, 130, 30, 20); // tombstone
+      }
+
+      // Collision
+      if (o.x < 160 && o.x > 80) {
+        if ((o.bat && py < 100) || (!o.bat && py > 100)) resetGame();
+      }
+      return o.x > -100;
+    });
+
+    score++; scoreEl.textContent = 'Score: ' + (score/10|0);
+    frame++;
+    if (running) requestAnimationFrame(loop);
+  }
+
+  function resetGame() {
+    running = false; score = 0; py = 80; vel = 0; obstacles = []; frame = 0;
+    scoreEl.textContent = 'Score: 0';
+    startText.style.display = 'block';
+    btn.style.display = 'none';
+  }
+
+  // 10-second countdown of doom
+  setInterval(() => {
+    if (overlay.style.display === 'flex') return;
+    secs = Math.max(0, secs - 1);
+    countdownEl.textContent = secs > 0 ? `Doom in: ${secs}` : 'WELCOME TO HELL';
+    countdownEl.style.color = secs <= 3 ? '#f00' : '#ff0';
+    countdownEl.style.fontSize = secs <= 3 ? '48px' : '36px';
+    if (secs <= 0) {
+      overlay.style.display = 'flex';
+      new Audio('data:audio/wav;base64,UklGRl4AAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=') // tiny evil laugh
+        .play().catch(()=>{});
+    }
+  }, 1000);
+
+})();
+</script>
+</div>
+
+<footer>© 2025 SK8ORDIE.COM — SKATE OR DIE™ is forever</footer>
+
+<!-- Cloudflare Pages Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ba8ca5770aa14007b68be2f97dc49db4"}'></script><!-- Cloudflare Pages Analytics --><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bf99d7e8b8b4d90',t:'MTc2ODY5MjM2Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
