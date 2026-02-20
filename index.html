@@ -6,12 +6,10 @@
     <link rel="icon" href="https://bankcoin.loan/SkateorDie.gif">
     <title>SK88 OR DIE | Coming Soon</title>
     <meta name="description" content="SK88 OR DIE - The radical return. Something massive is grinding its way in. Coming soon.">
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Creepster&family=Press+Start+2P&display=swap');
 
         * { box-sizing: border-box; }
-
         body, html {
             margin: 0;
             padding: 0;
@@ -19,6 +17,7 @@
             background: linear-gradient(135deg, #000000, #1a0033);
             color: #fff;
             font-family: 'Press Start 2P', cursive;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
@@ -28,32 +27,50 @@
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 1rem;
         }
 
-        /* ── Modular Navigation ── */
+        /* ── Navigation with pure CSS hamburger ── */
         header {
             width: 100%;
-            padding: 20px;
+            padding: 1rem;
             position: relative;
+            z-index: 100;
         }
 
         .main-nav {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .logo {
             font-family: 'Bangers', cursive;
-            font-size: 2.8rem;
+            font-size: clamp(1.8rem, 6vw, 3.5rem);
             color: #ff00ff;
             text-shadow: 0 0 15px #ff00ff, 3px 3px 0 #000;
             text-decoration: none;
+        }
+
+        /* Hamburger + menu */
+        .hamburger {
+            display: none;
+            font-size: 2rem;
+            color: #00ffff;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
+        #menu-toggle {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
         }
 
         .nav-links {
@@ -62,7 +79,7 @@
             padding: 0;
             display: flex;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 1.2rem;
             justify-content: center;
         }
 
@@ -72,8 +89,9 @@
             font-size: 1.1rem;
             text-shadow: 0 0 10px #00ffff;
             transition: all 0.3s;
-            padding: 8px 12px;
+            padding: 0.6rem 1rem;
             border: 2px solid transparent;
+            white-space: nowrap;
         }
 
         .nav-links li a:hover,
@@ -84,161 +102,175 @@
             transform: scale(1.05);
         }
 
-        /* Mobile nav toggle (optional - add JS later if wanted) */
-        @media (max-width: 768px) {
+        /* Mobile menu styles */
+        @media (max-width: 820px) {
+            .hamburger { display: block; }
             .nav-links {
                 display: none;
                 flex-direction: column;
-                width: 100%;
-                background: rgba(0,0,0,0.9);
                 position: absolute;
-                top: 80px;
+                top: 100%;
                 left: 0;
-                padding: 20px;
+                right: 0;
+                background: rgba(0,0,0,0.92);
+                padding: 1.5rem;
+                border-top: 3px solid #ff00ff;
+                box-shadow: 0 8px 30px rgba(255,0,255,0.3);
             }
 
-            .nav-links.active {
+            #menu-toggle:checked ~ .nav-links {
                 display: flex;
             }
 
-            /* You can add a hamburger button here later */
+            .nav-links li a {
+                font-size: 1.3rem;
+                padding: 1.2rem;
+                border-bottom: 1px solid #333;
+            }
+
+            .nav-links li:last-child a { border-bottom: none; }
         }
 
-        /* ── Main content styles (unchanged core) ── */
+        /* ── Main content ── */
         .main-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 2rem 1rem;
+            gap: 1.5rem;
         }
 
         .glitch {
             font-family: 'Bangers', cursive;
-            font-size: 9vw;
-            letter-spacing: 0.1em;
+            font-size: clamp(3.5rem, 12vw, 11rem);
+            letter-spacing: 0.08em;
             color: #ff00ff;
-            text-shadow: 
+            text-shadow:
                 0 0 10px #ff00ff,
                 0 0 20px #00ffff,
-                4px 4px 0 #000,
-                -4px -4px 0 #00ff00;
+                5px 5px 0 #000,
+                -5px -5px 0 #00ff00;
             animation: glitch 3s infinite;
-            margin-bottom: 20px;
+            margin: 0.5rem 0;
+            line-height: 0.95;
         }
 
         @keyframes glitch {
-            0%,100% { text-shadow: 4px 4px 0 #000, -4px -4px 0 #00ff00, 0 0 20px #ff00ff; }
-            20% { text-shadow: -4px 4px 0 #00ffff, 4px -4px 0 #ff00ff, 0 0 30px #00ff00; }
-            40% { text-shadow: 4px -4px 0 #000, -4px 4px 0 #00ffff, 0 0 15px #ff00ff; }
-            60% { text-shadow: -4px -4px 0 #ff00ff, 4px 4px 0 #00ff00, 0 0 25px #00ffff; }
-            80% { text-shadow: 4px 4px 0 #00ffff, -4px -4px 0 #000, 0 0 35px #ff00ff; }
+            0%,100% { text-shadow: 5px 5px 0 #000, -5px -5px 0 #00ff00, 0 0 20px #ff00ff; }
+            20%  { text-shadow: -5px 5px 0 #00ffff, 5px -5px 0 #ff00ff, 0 0 30px #00ff00; }
+            40%  { text-shadow: 5px -5px 0 #000, -5px 5px 0 #00ffff, 0 0 15px #ff00ff; }
+            60%  { text-shadow: -5px -5px 0 #ff00ff, 5px 5px 0 #00ff00, 0 0 25px #00ffff; }
+            80%  { text-shadow: 5px 5px 0 #00ffff, -5px -5px 0 #000, 0 0 35px #ff00ff; }
         }
 
         .subtitle {
-            font-size: 2.8vw;
+            font-size: clamp(1.3rem, 4.5vw, 3rem);
             color: #00ffff;
             text-shadow: 0 0 15px #00ffff;
-            margin-bottom: 40px;
+            margin: 0.8rem 0 2rem;
             animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0%,100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.75; } }
 
         .skull {
-            width: 280px;
-            height: 280px;
+            width: min(280px, 65vw);
+            height: min(280px, 65vw);
             background: url('https://bankcoin.loan/SkateorDie.gif') center/contain no-repeat;
-            margin: 40px 0;
+            margin: 2rem 0;
             animation: float 6s ease-in-out infinite;
+            image-rendering: pixelated;     /* keeps crisp pixel look */
         }
 
         @keyframes float {
             0%,100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50%     { transform: translateY(-18px); }
         }
 
         .coming-soon {
-            font-size: 5vw;
+            font-size: clamp(2.5rem, 9vw, 6rem);
             color: #ff00ff;
             text-shadow: 0 0 20px #ff00ff;
-            margin: 30px 0;
+            margin: 1.5rem 0;
         }
 
         .email-form {
-            margin: 50px 0 80px;
+            margin: 2.5rem 0 4rem;
+            width: 100%;
+            max-width: 480px;
         }
 
         input[type="email"] {
-            padding: 15px 60px;
-            font-size: 1.2rem;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
             border: 4px solid #00ffff;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.65);
             color: #fff;
             border-radius: 0;
-            width: 320px;
-            max-width: 90vw;
+            width: 100%;
             font-family: 'Press Start 2P', cursive;
+            margin-bottom: 1rem;
         }
 
         button, .email-form a.button {
-            padding: 15px 40px;
+            padding: 1.1rem 2.2rem;
             background: #ff00ff;
             color: #000;
             border: none;
             font-family: 'Bangers', cursive;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             cursor: pointer;
             box-shadow: 0 0 20px #ff00ff;
-            transition: all 0.3s;
+            transition: all 0.25s;
             text-decoration: none;
             display: inline-block;
+            width: 100%;
+            max-width: 320px;
         }
 
         button:hover, .email-form a.button:hover {
             background: #00ffff;
-            box-shadow: 0 0 30px #00ffff;
-            transform: scale(1.1);
+            box-shadow: 0 0 35px #00ffff;
+            transform: scale(1.06);
         }
 
         .footer {
-            font-size: 0.7rem;
-            color: #666;
-            padding: 30px 20px;
+            font-size: 0.75rem;
+            color: #777;
+            padding: 2rem 1rem;
             width: 100%;
             text-align: center;
         }
 
-        /* Retro CRT scanlines */
+        /* CRT scanlines */
         body::before {
             content: "";
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.05), rgba(0,0,0,0.05) 1px, transparent 1px, transparent 2px);
+            inset: 0;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.04), rgba(0,0,0,0.04) 1px, transparent 1px, transparent 2px);
             pointer-events: none;
             z-index: 10;
         }
 
-        @media (max-width: 768px) {
-            .glitch { font-size: 12vw; }
-            .subtitle { font-size: 5vw; }
-            .coming-soon { font-size: 8vw; }
-            .skull { width: 200px; height: 200px; }
-            input[type="email"] { width: 100%; margin-bottom: 15px; }
-            button { margin-left: 0; width: 100%; }
+        @media (max-width: 480px) {
+            .main-content { padding: 1.5rem 0.8rem; }
+            .email-form { margin: 2rem 0 3rem; }
+            button, .email-form a.button { font-size: 1.4rem; padding: 1rem 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Modular Navigation -->
     <header>
         <nav class="main-nav">
             <a href="index.html" class="logo">Skate or Die!</a>
+
+            <button class="hamburger" aria-label="Toggle menu">☰</button>
+
+            <input type="checkbox" id="menu-toggle">
+
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Table of Contents</a></li>
                 <li><a href="gallery.html">Cool GIF's</a></li>
@@ -254,12 +286,9 @@
         <div class="main-content">
             <h1 class="glitch">SK88 OR DIE</h1>
             <p class="subtitle">RADICAL. GNARLY. TOTALLY TUBULAR.</p>
-
             <div class="skull"></div>
-
             <h2 class="coming-soon">COMING SOON</h2>
-
-            <p style="font-size:1.4rem; max-width:700px; line-height:1.8;">
+            <p style="font-size: clamp(1rem, 3.5vw, 1.5rem); max-width: 680px; line-height: 1.7; margin: 1rem auto;">
                 The legendary crew is rebuilding the ramp.<br>
                 Bigger airs, harder slams, zero cops.<br>
                 Get notified the second we drop.
@@ -272,11 +301,11 @@
                 </form>
             </div>
 
-            <div class="email-form" style="margin-top: 60px;">
+            <div class="email-form" style="margin-top: 3rem;">
                 <a href="mailto:thrash.hard@sk88ordie.com" class="button">
                     ⚡ SCREAM AT US ⚡<br>thrash.hard@sk88ordie.com
                 </a>
-                <p style="margin-top:15px; font-size:0.9rem; opacity:0.8;">
+                <p style="margin-top:1rem; font-size:0.95rem; opacity:0.8;">
                     (or click → opens your email client — old school style)
                 </p>
             </div>
@@ -287,8 +316,7 @@
         </div>
     </div>
 
-    <!-- Your analytics / tracking scripts -->
-    <!-- Google tag (gtag.js) -->
+    <!-- Analytics (unchanged) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HDXNR8D1Q5"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -297,9 +325,6 @@
       gtag('config', 'G-HDXNR8D1Q5');
     </script>
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="sk/WEoDON1uusykwpaDtpw" async></script>
-
-    <!-- Cloudflare stuff (keep as-is) -->
-    <!-- ... -->
 
 </body>
 </html>
