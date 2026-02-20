@@ -6,6 +6,7 @@
     <link rel="icon" href="https://bankcoin.loan/SkateorDie.gif">
     <title>SK88 OR DIE | Coming Soon</title>
     <meta name="description" content="SK88 OR DIE - The radical return. Something massive is grinding its way in. Coming soon.">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Creepster&family=Press+Start+2P&display=swap');
 
@@ -27,15 +28,90 @@
             justify-content: space-between;
             align-items: center;
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
         }
 
+        /* ── Modular Navigation ── */
+        header {
+            width: 100%;
+            padding: 20px;
+            position: relative;
+        }
+
+        .main-nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 2.8rem;
+            color: #ff00ff;
+            text-shadow: 0 0 15px #ff00ff, 3px 3px 0 #000;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .nav-links li a {
+            color: #00ffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px #00ffff;
+            transition: all 0.3s;
+            padding: 8px 12px;
+            border: 2px solid transparent;
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            border-color: #ff00ff;
+            background: rgba(255,0,255,0.15);
+            color: #ff00ff;
+            transform: scale(1.05);
+        }
+
+        /* Mobile nav toggle (optional - add JS later if wanted) */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(0,0,0,0.9);
+                position: absolute;
+                top: 80px;
+                left: 0;
+                padding: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            /* You can add a hamburger button here later */
+        }
+
+        /* ── Main content styles (unchanged core) ── */
         .main-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 40px 20px;
         }
 
         .glitch {
@@ -94,7 +170,7 @@
         }
 
         .email-form {
-            margin-top: 50px;
+            margin: 50px 0 80px;
         }
 
         input[type="email"] {
@@ -109,7 +185,7 @@
             font-family: 'Press Start 2P', cursive;
         }
 
-        button {
+        button, .email-form a.button {
             padding: 15px 40px;
             background: #ff00ff;
             color: #000;
@@ -117,12 +193,13 @@
             font-family: 'Bangers', cursive;
             font-size: 1.5rem;
             cursor: pointer;
-            margin-left: 10px;
             box-shadow: 0 0 20px #ff00ff;
             transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        button:hover {
+        button:hover, .email-form a.button:hover {
             background: #00ffff;
             box-shadow: 0 0 30px #00ffff;
             transform: scale(1.1);
@@ -131,8 +208,9 @@
         .footer {
             font-size: 0.7rem;
             color: #666;
-            margin-top: 40px;
-            padding: 20px;
+            padding: 30px 20px;
+            width: 100%;
+            text-align: center;
         }
 
         /* Retro CRT scanlines */
@@ -154,29 +232,23 @@
             button { margin-left: 0; width: 100%; }
         }
     </style>
-
-<nav class="container">
-      <a href="index.html" class="logo">Skate or Die!</a>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Table of Contents</a></li>
-        <li><a href="gallery.html">Cool GIF's</a></li>
-<li><a href="sk88ordie.html">Sk88 or die Version 2.0</a></li>
-        <li><a href="Skateordie.html">Sk88 or die video game Version 1.0 (Desktop friendly only)</a></li>
-         <li><a href="store.html">Sk88ordie StoreFront </a></li>
-      </ul>
-    </nav>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-HDXNR8D1Q5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<body>
 
-  gtag('config', 'G-HDXNR8D1Q5');
-</script>
-<script src="https://analytics.ahrefs.com/analytics.js" data-key="sk/WEoDON1uusykwpaDtpw" async></script>
-<body><a href="https://sk88ordie.com/cdn-cgi/content?id=PvNkr4o_SXU0Y_OB60sCk2hL_IL5wzoPpVVgvsg5ZVg-1768692321.93154-1.0.1.1-Jk.xACF1amT6XrToVocvDE9oI.zJnFyBkJUc9.zntHk" aria-hidden="true" rel="nofollow noopener" style="display: none !important; visibility: hidden !important"></a>
+    <!-- Modular Navigation -->
+    <header>
+        <nav class="main-nav">
+            <a href="index.html" class="logo">Skate or Die!</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Table of Contents</a></li>
+                <li><a href="gallery.html">Cool GIF's</a></li>
+                <li><a href="sk88ordie.html">Sk88 or die Version 2.0</a></li>
+                <li><a href="Skateordie.html">Sk88 or die video game v1.0 (Desktop)</a></li>
+                <li><a href="store.html">Sk88ordie StoreFront</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div class="container">
         <div class="main-content">
             <h1 class="glitch">SK88 OR DIE</h1>
@@ -192,29 +264,41 @@
                 Get notified the second we drop.
             </p>
 
-     </div>
             <div class="email-form">
-                <form action="https://formspree.io/f/mnnrypvl" method="POST"> <!-- Replace with your actual endpoint -->
+                <form action="https://formspree.io/f/mnnrypvl" method="POST">
                     <input type="email" name="email" placeholder="ENTER EMAIL FOR FIRST OLLIE" required>
                     <button type="submit">NOTIFY ME</button>
                 </form>
             </div>
-    </div>
-            <div class="email-form">
-    <a href="/cdn-cgi/l/email-protection#35415d4754465d1b5d54475175465e0d0d5a47515c501b565a580a4640575f50564108667e0d0d1007057a67100705717c7010070576677062" class="button" style="display:inline-block; padding:15px 40px; background:#ff00ff; color:#000; 
-              font-family:'Bangers', cursive; font-size:1.5rem; text-decoration:none;
-              box-shadow:0 0 20px #ff00ff; transition:all 0.3s;">
-     ⚡ SCREAM AT US ⚡ thrash.hard@ᛋk88ordie.com
-    </a>
-    <p style="margin-top:15px; font-size:0.9rem; opacity:0.8;">
-        (or click the link which, opens your email app for you— old school way)
-    </p>
-</div>
+
+            <div class="email-form" style="margin-top: 60px;">
+                <a href="mailto:thrash.hard@sk88ordie.com" class="button">
+                    ⚡ SCREAM AT US ⚡<br>thrash.hard@sk88ordie.com
+                </a>
+                <p style="margin-top:15px; font-size:0.9rem; opacity:0.8;">
+                    (or click → opens your email client — old school style)
+                </p>
+            </div>
         </div>
 
         <div class="footer">
             © 2025 SK88ORDIE.COM — SKATE OR DIE™ is forever
         </div>
     </div>
-<!-- Cloudflare Pages Analytics --><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ba8ca5770aa14007b68be2f97dc49db4"}'></script><!-- Cloudflare Pages Analytics --><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bf99c841d0a4d90',t:'MTc2ODY5MjMyMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+    <!-- Your analytics / tracking scripts -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HDXNR8D1Q5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-HDXNR8D1Q5');
+    </script>
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="sk/WEoDON1uusykwpaDtpw" async></script>
+
+    <!-- Cloudflare stuff (keep as-is) -->
+    <!-- ... -->
+
+</body>
 </html>
